@@ -85,12 +85,24 @@ public class AddActivity extends AppCompatActivity implements LocationListener{
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getApplicationContext(),MapActivity.class);
-                String[] xs=e2.getText().toString().trim().split(",");
-            //    Log.e("xxx",xs[0]);
-                intent.putExtra("X",xs[0]);
-                intent.putExtra("Y",xs[1]);
-
-                startActivity(intent);
+                String q=e2.getText().toString().trim();
+                if(q.isEmpty())
+                {
+                    Toast.makeText(getApplicationContext(),"Nhập thiếu dữ liệu",Toast.LENGTH_SHORT).show();
+                }else {
+                    if (q.contains(",")) {
+                        String[] xs = q.split(",");
+                        if(xs.length==2) {
+                            intent.putExtra("X", xs[0]);
+                            intent.putExtra("Y", xs[1]);
+                            startActivity(intent);
+                        }else{
+                            Toast.makeText(getApplicationContext(),"Sai cú pháp",Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        Toast.makeText(getApplicationContext(),"Sai cú pháp",Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
         t3.setOnClickListener(new View.OnClickListener() {
@@ -102,9 +114,22 @@ public class AddActivity extends AppCompatActivity implements LocationListener{
                 {
                     Toast.makeText(getApplicationContext(),"Nhập thiếu dữ liệu",Toast.LENGTH_SHORT).show();
                 }else{
-                    dbHelper.addLocation(new Item(name,location));
-                    Toast.makeText(getApplicationContext(),"Thêm dữ liệu thành công",Toast.LENGTH_SHORT).show();
-                    finish();
+                    if(location.contains(","))
+                    {
+                        String[] xs = location.split(",");
+                        if(xs.length==2)
+                        {
+                            dbHelper.addLocation(new Item(name,location));
+                            Toast.makeText(getApplicationContext(),"Thêm dữ liệu thành công",Toast.LENGTH_SHORT).show();
+                            finish();
+                        }else{
+                            Toast.makeText(getApplicationContext(),"Sai cú pháp",Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        Toast.makeText(getApplicationContext(),"Sai cú pháp",Toast.LENGTH_SHORT).show();
+
+                    }
+
                 }
             }
         });
