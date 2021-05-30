@@ -93,9 +93,18 @@ public class AddActivity extends AppCompatActivity implements LocationListener{
                     if (q.contains(",")) {
                         String[] xs = q.split(",");
                         if(xs.length==2) {
-                            intent.putExtra("X", xs[0]);
-                            intent.putExtra("Y", xs[1]);
-                            startActivity(intent);
+                            try {
+                                double x=Double.parseDouble(xs[0]);
+                                double y=Double.parseDouble(xs[1]);
+                                intent.putExtra("X", xs[0]);
+                                intent.putExtra("Y", xs[1]);
+                                startActivity(intent);
+                            }catch (Exception e)
+                            {
+                                Toast.makeText(getApplicationContext(),"Sai kiểu dữ liệu",Toast.LENGTH_SHORT).show();
+
+                            }
+
                         }else{
                             Toast.makeText(getApplicationContext(),"Sai cú pháp",Toast.LENGTH_SHORT).show();
                         }
@@ -119,9 +128,20 @@ public class AddActivity extends AppCompatActivity implements LocationListener{
                         String[] xs = location.split(",");
                         if(xs.length==2)
                         {
-                            dbHelper.addLocation(new Item(name,location));
-                            Toast.makeText(getApplicationContext(),"Thêm dữ liệu thành công",Toast.LENGTH_SHORT).show();
-                            finish();
+                            try {
+                                double x=Double.parseDouble(xs[0]);
+                                double y=Double.parseDouble(xs[1]);
+                                dbHelper.addLocation(new Item(name, location));
+                                Toast.makeText(getApplicationContext(), "Thêm dữ liệu thành công", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }catch (Exception e)
+                            {
+                                Toast.makeText(getApplicationContext(),"Sai kiểu dữ liệu",Toast.LENGTH_SHORT).show();
+
+                            }
+
+
+
                         }else{
                             Toast.makeText(getApplicationContext(),"Sai cú pháp",Toast.LENGTH_SHORT).show();
                         }
