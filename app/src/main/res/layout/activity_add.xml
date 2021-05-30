@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AddActivity">
+    <EditText
+        android:id="@+id/e1"
+        android:layout_margin="30dp"
+        android:hint="Place name"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cst_edittext"/>
+    <EditText
+        android:id="@+id/e2"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="70dp"
+        android:hint="Location"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cst_edittext"/>
+    <TextView
+
+        android:id="@+id/tv1"
+        android:layout_margin="30dp"
+        android:text="GET CURRENT LOCATION"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cst_button"/>
+    <TextView
+
+        android:id="@+id/tv2"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:text="SHOW ON MAP"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cst_button"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginBottom="20dp"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_alignParentBottom="true"
+
+            android:id="@+id/tv3"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="SAVE"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cst_button"/>
+    </RelativeLayout>
+
+
+</LinearLayout>
