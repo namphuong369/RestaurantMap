@@ -29,6 +29,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
@@ -37,6 +38,7 @@ import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -77,8 +79,8 @@ public class AddActivity extends AppCompatActivity implements LocationListener{
         t1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                getCurentLocation();
+                getLocation();
+                //getCurentLocation();
             }
         });
         t2.setOnClickListener(new View.OnClickListener() {
@@ -153,6 +155,36 @@ public class AddActivity extends AppCompatActivity implements LocationListener{
                 }
             }
         });
+    }
+    private void getLocation()
+    {
+        FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }else {
+            fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+                @Override
+                public void onComplete(@NonNull Task<Location> task) {
+                    Location loc = task.getResult();
+                    if(loc!=null){
+                        try {
+                            Geocoder geocoder=new Geocoder(getApplicationContext(), Locale.getDefault());
+                            List<Address> addresses=geocoder.getFromLocation(loc.getLatitude(),loc.getLongitude(),1);
+                            e2.setText(addresses.get(0).getLatitude()+","+addresses.get(0).getLongitude());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+        }
     }
     private void getCurentLocation()
     {
